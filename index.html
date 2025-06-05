@@ -1,13 +1,98 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>فرم ثبت</title>
+  <title>Submit Your Query</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #111827;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .card h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #1e3a8a;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #2563eb;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      background-color: #2563eb;
+      color: #ffffff;
+      padding: 12px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #6b7280;
+    }
+  </style>
 </head>
 <body>
-  <form method="POST" action="https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec">
-    <input type="text" name="query" placeholder="متن را وارد کن..." required>
-    <button type="submit">ارسال</button>
-  </form>
+
+  <div class="card">
+    <h1>Submit Your Text</h1>
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec">
+      <input type="text" name="query" placeholder="Enter your text..." required>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="footer">
+      Designed with ❤️ by Mmdomidi
+    </div>
+  </div>
+
 </body>
 </html>
