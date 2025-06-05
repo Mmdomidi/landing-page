@@ -35,14 +35,13 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       statusText.innerText = "در حال ارسال...";
-      
+
+      const formData = new FormData();
+      formData.append("query", document.getElementById("query").value);
+
       fetch("https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec", {
         method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `query=${encodeURIComponent(document.getElementById("query").value)}`
+        body: formData
       }).then(() => {
         statusText.innerText = "با موفقیت ثبت شد!";
         form.reset();
