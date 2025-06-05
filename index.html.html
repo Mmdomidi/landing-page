@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحه ثبت</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+      direction: rtl;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>فرم ثبت نام / جستجو</h2>
+  <form id="submit-form">
+    <input type="text" name="query" id="query" placeholder="متنت را وارد کن..." required>
+    <br>
+    <button type="submit">ارسال</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const form = document.getElementById("submit-form");
+    const statusText = document.getElementById("status");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      statusText.innerText = "در حال ارسال...";
+      
+      fetch("https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `query=${encodeURIComponent(document.getElementById("query").value)}`
+      }).then(() => {
+        statusText.innerText = "با موفقیت ثبت شد!";
+        form.reset();
+      }).catch(() => {
+        statusText.innerText = "خطا در ارسال. دوباره امتحان کنید.";
+      });
+    });
+  </script>
+
+</body>
+</html>
