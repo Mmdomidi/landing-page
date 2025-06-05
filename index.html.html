@@ -2,26 +2,55 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>صفحه ثبت</title>
+  <title>فرم ثبت</title>
   <style>
     body {
       font-family: sans-serif;
-      text-align: center;
-      padding: 40px;
       direction: rtl;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f0f0;
     }
-    input, button {
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
       padding: 10px;
-      margin: 10px;
       font-size: 16px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: green;
     }
   </style>
 </head>
 <body>
 
-  <h2>فرم ثبت نام / جستجو</h2>
+  <h2>فرم ثبت اطلاعات</h2>
+
   <form id="submit-form">
-    <input type="text" name="query" id="query" placeholder="متنت را وارد کن..." required>
+    <input type="text" name="query" id="query" placeholder="متن خود را وارد کنید" required>
     <br>
     <button type="submit">ارسال</button>
   </form>
@@ -36,17 +65,20 @@
       e.preventDefault();
       statusText.innerText = "در حال ارسال...";
 
-      const formData = new FormData();
-      formData.append("query", document.getElementById("query").value);
+      const queryValue = document.getElementById("query").value;
 
       fetch("https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec", {
         method: "POST",
-        body: formData
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `query=${encodeURIComponent(queryValue)}`
       }).then(() => {
         statusText.innerText = "با موفقیت ثبت شد!";
         form.reset();
       }).catch(() => {
-        statusText.innerText = "خطا در ارسال. دوباره امتحان کنید.";
+        statusText.innerText = "خطا در ارسال. دوباره تلاش کنید.";
       });
     });
   </script>
