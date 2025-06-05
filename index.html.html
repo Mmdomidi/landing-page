@@ -3,85 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>فرم ثبت</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      direction: rtl;
-      text-align: center;
-      padding: 50px;
-      background-color: #f0f0f0;
-    }
-
-    h2 {
-      margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      width: 300px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    #status {
-      margin-top: 20px;
-      color: green;
-    }
-  </style>
 </head>
 <body>
-
-  <h2>فرم ثبت اطلاعات</h2>
-
-  <form id="submit-form">
-    <input type="text" name="query" id="query" placeholder="متن خود را وارد کنید" required>
-    <br>
+  <form method="POST" action="https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec">
+    <input type="text" name="query" placeholder="متن را وارد کن..." required>
     <button type="submit">ارسال</button>
   </form>
-
-  <p id="status"></p>
-
-  <script>
-    const form = document.getElementById("submit-form");
-    const statusText = document.getElementById("status");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      statusText.innerText = "در حال ارسال...";
-
-      const queryValue = document.getElementById("query").value;
-
-      fetch("https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `query=${encodeURIComponent(queryValue)}`
-      }).then(() => {
-        statusText.innerText = "با موفقیت ثبت شد!";
-        form.reset();
-      }).catch(() => {
-        statusText.innerText = "خطا در ارسال. دوباره تلاش کنید.";
-      });
-    });
-  </script>
-
 </body>
 </html>
