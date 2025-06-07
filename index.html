@@ -1,99 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <title>Submit Your Query</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Inter Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <title>بررسی کاربر در گوگل شیت</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: #111827;
-    }
-
-    .card {
-      background: #ffffff;
-      padding: 32px 24px;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 400px;
+      font-family: sans-serif;
       text-align: center;
+      padding: 50px;
+      background: #f9f9f9;
     }
-
-    .card h1 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #1e3a8a;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 12px 14px;
+    input {
+      padding: 10px;
       font-size: 16px;
-      border: 2px solid #cbd5e1;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      transition: border-color 0.3s;
+      width: 200px;
     }
-
-    input[type="text"]:focus {
-      border-color: #2563eb;
-      outline: none;
-    }
-
     button {
-      width: 100%;
-      background-color: #2563eb;
-      color: #ffffff;
-      padding: 12px 14px;
+      padding: 10px 20px;
       font-size: 16px;
-      border: none;
-      border-radius: 8px;
+      margin: 10px;
       cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
     }
-
-    button:hover {
-      background-color: #1d4ed8;
-    }
-
-    .footer {
+    #result {
       margin-top: 20px;
-      font-size: 13px;
-      color: #6b7280;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
+  <h2>آیا کاربر در سیستم وجود دارد؟</h2>
+  <input type="text" id="name" placeholder="نام را وارد کنید" />
+  <button onclick="checkUser()">بررسی</button>
+  <p id="result"></p>
+  <div id="registerContainer"></div>
 
-  <div class="card">
-    <h1>Submit Your Text</h1>
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbzNwKQEZPXcDUKruvHLfDARqkZrQshjNmH1haIu2qotU8XxqOe4lt4vFJS1VtGOOUEs/exec">
-  <input type="text" name="query" placeholder="Enter your text..." required>
-  <button type="submit">Search @mohammad-omidi.ir</button>
-    </form>
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbzEiGNg-woehro4zc5FgtpMwYtgernTmiY97wSAvkhrqy1TIj2fgNJpm-iko3_D3n5qEw/exec";
 
-    <div class="footer">
-      ..
-    </div>
-  </div>
+async function checkUser() {
+  const name = document.getElementById("name").value.trim();
+  const result = document.getElementById("result");
+  const registerContainer = document.getElementById("registerContainer");
+  registerContainer.innerHTML = "";
 
+  if (!name) {
+    result.textContent = "لطفاً یک نام وارد کنید.";
+    return;
+  }
+
+  result.textContent = "در حال بررسی...";
+
+  try {
+    const response = await fetch(`${API_URL}?name=${encodeURIComponent(name)}`);
+    const data = await response.json();
+
+    if (data.error) {
+      result.textContent = `❌ خطا: ${data.error}`;
+    } else if (data.exists) {
+      result.textContent = `✅ کاربر وجود دارد. ایمیل: ${data.email}`;
+    } else {
+      const suggestedEmail = data.email;
+      result.textContent = `❌ کاربر یافت نشد. ایمیل پیشنهادی: ${suggestedEmail}`;
+
+      const registerButton = document.createElement("button");
+      registerButton.textContent = "ثبت ایمیل پیشنهادی";
+      registerButton.onclick = () => registerEmail(name, suggestedEmail);
+      registerContainer.appendChild(registerButton);
+    }
+  } catch (err) {
+    console.error(err);
+    result.textContent = "⚠️ خطا در ارتباط با سرور.";
+  }
+}
+
+async function registerEmail(name, email) {
+  const result = document.getElementById("result");
+  result.textContent = "در حال ثبت...";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      result.textContent = `✅ ایمیل ثبت شد: ${email}`;
+      document.getElementById("registerContainer").innerHTML = "";
+    } else {
+      result.textContent = `❌ خطا در ثبت: ${data.error || "نامشخص"}`;
+    }
+  } catch (err) {
+    console.error(err);
+    result.textContent = "⚠️ خطا هنگام ثبت در سرور.";
+  }
+  } 
+  </script>
 </body>
 </html>
