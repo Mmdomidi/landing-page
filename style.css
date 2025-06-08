@@ -1,0 +1,216 @@
+/* ریست اولیه مرورگر */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* تنظیمات پایه برای کل سایت */
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: linear-gradient(180deg, #0e1a2b, #1a2f4d);
+  color: #f1f5f9;
+  text-align: center;
+  direction: rtl;
+}
+
+/* بخش ابتدایی صفحه */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #b0bec5;
+  margin-bottom: 2rem;
+}
+
+/* باکس جستجو (input و دکمه) */
+.search-box {
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  font-size: 1.1rem;
+  outline: none;
+  color: #333;
+  text-align: left;
+  direction: ltr;
+}
+
+.search-box button {
+  background: #4fc3f7;
+  color: #0e1a2b;
+  padding: 1rem 1.2rem;
+  font-weight: bold;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.search-box button:hover {
+  background: #03a9f4;
+}
+
+/* بخش ویژگی‌ها */
+.features {
+  padding: 4rem 2rem;
+  background-color: #162a44;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature {
+  background: #1c2f45;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+}
+
+.feature h3 {
+  color: #4fc3f7;
+  margin-bottom: 1rem;
+}
+
+.feature p {
+  color: #cfd8dc;
+}
+
+/* فوتر پایانی */
+footer {
+  background: #0e1a2b;
+  color: #b0bec5;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+footer span {
+  color: #4fc3f7;
+  font-weight: bold;
+}
+
+/* جعبه پیام برای نمایش وضعیت (موفق، خطا و...) */
+.status-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(180deg, #0e1a2b, #1a2f4d);
+}
+
+.message-box {
+  background: #1c2f45;
+  padding: 2.5rem 3.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  text-align: right;
+  transition: border-right 0.3s ease;
+}
+
+.message-box h2 {
+  color: #4fc3f7;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.message-box p {
+  color: #cfd8dc;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* رنگ‌بندی وضعیت‌ها */
+.message-box.success {
+  border-right: 6px solid #4caf50; /* سبز */
+}
+
+.message-box.duplicate {
+  border-right: 6px solid #ff9800; /* نارنجی */
+}
+
+.message-box.error {
+  border-right: 6px solid #f44336; /* قرمز */
+}
+.home-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4fc3f7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Vazirmatn', sans-serif;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.home-button:hover {
+  background-color: #039be5;
+}
+.reserve-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4fc3f7;
+  color: #0e1a2b;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Vazirmatn', sans-serif;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.reserve-button:hover {
+  background-color: #039be5;
+}
+
+.reserve-button:disabled {
+  background-color: #26c6da;
+  color: #ffffff;
+  cursor: default;
+  opacity: 0.8;
+}
+
